@@ -82,6 +82,13 @@ Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
   )
 ```
 
-
-
-
+```
+WISH> (example)
+Example of using trivial wishes.
+Wishes are being made, but nothing is happening yet.
+...
+2 + 2 = 4
+3 + 4 = 7
+99 + 1 = 100
+NIL
+```
