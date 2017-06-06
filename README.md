@@ -12,7 +12,7 @@ This pattern repeats often enough to justify this miniscule library.
 
 # Usage
 
-Subclass your data from `wish:wish` and add your own slots.
+Use `(wish:define name slotnames..)` to quickly create a wish class with slots to hold your data, or subclass from `wish:wish` the long way.
 
 Create a `wish:fulfil` method for your wish.
 
@@ -24,7 +24,7 @@ Continue with your code, possibly setting data in your wish or making other wish
 
 Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
 
-# Example
+# Example, literally...
 
 ```lisp
 ;; -----------------------------------------------------------------------------
