@@ -1,4 +1,4 @@
-# CL-WISH
+# TRIVIAL-WISH
 
 This library allows you to create _wishes_ which are requests for a later computation, and fulfil them at a later time.
 
