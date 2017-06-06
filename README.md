@@ -34,7 +34,8 @@ Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes 
 ;; We need to keep wishes somewhere.  Wishes are a list, so any reasonable
 ;; location will do.
 ;;
-(defparameter *star* nil)
+
+(defparameter *star* (make-instance 'wish:wishes))
 ;;
 ;; In real life, we would probably place wishes into a slot of some class.
 ;;
