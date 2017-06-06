@@ -8,15 +8,19 @@
   (:documentation "Perform the requested computation on a wish-derived object"))
 
 (defmethod initialize-instance :after ((wish wish) &key upon)
-  (push wish upon))
+  (push wish (data upon)))
 
+(defclass wishes ()
+  ((data :accessor data :initform nil))
+  (:documentation "A container for wish-derived objects; can be passed"))
 
-(defmethod fulfil ((wishes cons) &key (lifo t) )
+(defmethod fulfil ((wishes wishes) &key (lifo t) )
   "Fulfil all wishes.  Optionally, 
 :lifo nil to feverse the native last-in-first-out order;
 :fun to supply a different function to process each wish"
-  (mapc #'fulfil (if lifo wishes (reverse wishes)))
-  (setf wishes nil))
+  (with-slots (data) wishes
+    (mapc #'fulfil (if lifo data (reverse data)))
+    (setf data nil)))
 
 ;;
 ;; A convenience for defining wish classes

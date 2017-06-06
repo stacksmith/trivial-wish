@@ -100,12 +100,16 @@ Wishes are being made, but nothing is happening yet.
 NIL
 ```
 # NOTES
+example.lisp file does not load with the package; if you want to run it, compile it yourself.
 
-The `fulfil` method when invoked on a wish fulfils it.  When invoked on a list, it calls `(fulfil wish) invoke on every wish in the list.
+The `fulfil` method when invoked on a wish fulfils it.  When invoked on an instance of `wishes`, it calls `(fulfil wish) invoke on every wish in the container.
 
-If your fulfilment logic requires more than just the wish itself you can try to defun the `fulfil` method in a lexical scope that has access to the data you need.  If more is required, consider that all fulfil does is
+If your fulfilment logic requires more than just the wish itself you can try to defun the `fulfil` method in a lexical scope that has access to the data you need.  
+
+fulfil allows other keyboards, but I could not think of a way to generalize passing arbitrary data to it in a loop...  If more is required, consider that all fulfil does is:
 ```
- (mapc #'fulfil (if lifo wishes (reverse wishes)))
-  (setf wishes nil)
+(with-slots (data) wishes
+    (mapc #'fulfil (if lifo data (reverse data)))
+    (setf data nil))
 ```
 Just write your own!
