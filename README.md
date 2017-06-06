@@ -1,14 +1,16 @@
 # CL-WISH
 
-A wish is a request for a later computation.
+This library allows you to create _wishes_ which are requests for a later computation, and fulfil them at a later time.
 
 Note that this is not threaded, or related to promises and other multiprocessing libraries.
 
+Classes derived from `wish:wish` contain data, and the computation is performed via the `fulfil` method you specialize for each class.  Different kinds of wishes may be freely mixed.
+
 # Why?
 
-There are situations that require delaying computation until later, while more data is gathered.  Rather than keeping track of the data yourself, you can create a wish class containing the data and 'fulfilling' the wish later.
+There are situations that require delaying computation until later, while more data is gathered.  Other times, you may want to batch up a number of computations and perform them together.  Rather than keeping track of the data yourself, you can create wish classes containing the data and 'fulfilling' the wishes later.
 
-This pattern repeats often enough to justify this miniscule library.
+This pattern occurs often enough (in my opinion) to justify this miniscule library.
 
 # Usage
 
