@@ -37,9 +37,14 @@ Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
 ;; -----------------------------------------------------------------------------
 ;; Now we subclass 'wish' to keep our data...
 ;;
-(defclass my-wish (wish:wish)
-  ((value1 :initarg :v1 :accessor value1 :initform nil)
-   (value2 :initarg :v2 :accessor value2 :initform nil)))
+(wish:define my-wish value1 value2)
+;;
+;; which is a quick way of doing
+;;
+;; (defclass my-wish (wish:wish)
+;;   ((value1 :initarg :value1 :accessor value1 :initform nil)
+;;   (value2 :initarg :value2 :accessor value2 :initform nil)))
+;;
 ;;------------------------------------------------------------------------------
 ;; Every wish class must have a 'fulfil' method that will be called later.
 ;;
@@ -54,19 +59,19 @@ Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
   ;;----------------------------------------------------------------------------
   ;; We can make a wish like this:
   ;;
-  (make-instance 'my-wish :upon *star* :v1 2 :v2 2)
+  (make-instance 'my-wish :upon *star* :value1 2 :value2 2)
   ;;
   (format t "Example of using trivial wishes.~&")
   ;;----------------------------------------------------------------------------
   ;; Or, if we don't know all the data, just put in what we do know:
   ;;
-  (let ((partial (make-instance 'my-wish :upon *star* :v1 3 )))
+  (let ((partial (make-instance 'my-wish :upon *star* :value1 3 )))
     ;;
     (format t "~&Wishes are being made, but nothing is happening yet.~&")
     ;;--------------------------------------------------------------------------
     ;; and another one:
     ;;
-    (make-instance 'my-wish :upon *star* :v1 99 :v2 1)
+    (make-instance 'my-wish :upon *star* :value1 99 :value2 1)
     ;;
     (format t "~&...~&")
     ;;--------------------------------------------------------------------------

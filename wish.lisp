@@ -23,3 +23,15 @@
 		(reverse (data wishes))))
   (setf (data wishes) nil))
 
+;;
+;; A convenience for defining wish classes
+;;
+(defmacro define (name &rest slots)
+  (let ((expanded-slots
+	 (mapcar (lambda (slot)
+		 (list slot :initarg
+		       (intern (string-upcase slot) "KEYWORD")
+		       :accessor slot :initform nil))
+		 slots)))
+    `(defclass ,name (wish:wish)
+       ,expanded-slots)))
