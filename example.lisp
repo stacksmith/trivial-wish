@@ -33,7 +33,7 @@
   ;;
   (make-instance 'my-wish :upon *star* :value1 2 :value2 2)
   ;;
-  (format t "Example of using trivial wishes.~&")
+  (format t "~&Example of using trivial wishes.~&")
   ;;----------------------------------------------------------------------------
   ;; Or, if we don't know all the data, just put in what we do know:
   ;;
