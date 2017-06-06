@@ -3,6 +3,6 @@
 (defpackage #:trivial-wish
   (:nicknames :wish)
   (:use #:cl)
-  (:export   #:wish #:wishes #:define #:fulfil ))
+  (:export   #:wish #:define #:fulfil ))
 
  

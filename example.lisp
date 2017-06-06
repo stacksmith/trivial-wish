@@ -1,8 +1,9 @@
 (in-package :trivial-wish)
 ;; -----------------------------------------------------------------------------
-;; We need to keep wishes somewhere.
+;; We need to keep wishes somewhere.  Wishes are a list, so any reasonable
+;; location will do.
 ;;
-(defparameter *star* (make-instance 'wishes))
+(defparameter *star* nil)
 ;;
 ;; In real life, we would probably place wishes into a slot of some class.
 ;;

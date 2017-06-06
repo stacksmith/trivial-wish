@@ -16,21 +16,23 @@ Use `(wish:define name slotnames..)` to quickly create a wish class with slots t
 
 Create a `wish:fulfil` method for your wish.
 
-Embed a `wishes` instance somewhere, to keep all the wishes.
+Wishes must be kept in a list somewhere.  Create a slot or a variable with a reasonable scope.
 
-Make wishes with  by `(make-instance...)`.
+Make wishes with `(make-instance 'wishname :upon wishlist)`; they are automatically pushed onto the wishlist.
 
 Continue with your code, possibly setting data in your wish or making other wishes.
 
-Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
+Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes in LIFO order, or in natural order with the optional `:lifo nil` parameter
 
 # Example, literally...
 
 ```lisp
+(in-package :trivial-wish)
 ;; -----------------------------------------------------------------------------
-;; We need to keep wishes somewhere.
+;; We need to keep wishes somewhere.  Wishes are a list, so any reasonable
+;; location will do.
 ;;
-(defparameter *star* (make-instance 'wishes))
+(defparameter *star* nil)
 ;;
 ;; In real life, we would probably place wishes into a slot of some class.
 ;;
@@ -61,7 +63,7 @@ Call `(wish:fulfil wishes)` to finally invoke `fulfil` method on all the wishes.
   ;;
   (make-instance 'my-wish :upon *star* :value1 2 :value2 2)
   ;;
-  (format t "Example of using trivial wishes.~&")
+  (format t "~&Example of using trivial wishes.~&")
   ;;----------------------------------------------------------------------------
   ;; Or, if we don't know all the data, just put in what we do know:
   ;;
@@ -97,3 +99,13 @@ Wishes are being made, but nothing is happening yet.
 99 + 1 = 100
 NIL
 ```
+# NOTES
+
+The `fulfil` method when invoked on a wish fulfils it.  When invoked on a list, it calls `(fulfil wish) invoke on every wish in the list.
+
+If your fulfilment logic requires more than just the wish itself you can try to defun the `fulfil` method in a lexical scope that has access to the data you need.  If more is required, consider that all fulfil does is
+```
+ (mapc #'fulfil (if lifo wishes (reverse wishes)))
+  (setf wishes nil)
+```
+Just write your own!
