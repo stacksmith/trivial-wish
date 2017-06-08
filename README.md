@@ -18,7 +18,7 @@ Use `(wish:define name slotnames..)` to quickly create a wish class with slots t
 
 Create a `wish:fulfil` method for your wish.
 
-Wishes must be kept in a list somewhere.  Create a slot or a variable with a reasonable scope.
+Wishes must be kept a `wish:wishes` object -- create a slot or a variable with a reasonable scope, and initialize with `(make-instance 'wish:wishes)` 
 
 Make wishes with `(make-instance 'wishname :upon wishlist)`; they are automatically pushed onto the wishlist.
 
